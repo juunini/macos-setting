@@ -4,18 +4,14 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 cd
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
-echo "source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
 
 cd ~/.oh-my-zsh/plugins 
 git clone https://github.com/zsh-users/zsh-autosuggestions.git
-echo "source ${(q-)PWD}/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
 
 sed -i -e "s/ZSH_THEME=\"robbyrussell\"/ZSH_THEME=\"agnoster\"/g" ~/.zshrc
-sed -i -e "s/plugins=(git)/plugins=(git zsh-syntax-highlighting zsh-autosuggestions)/g" ~/.zshrc
+sed -i -e "s/plugins=(git)/source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh\nsource ${(q-)PWD}/zsh-autosuggestions/zsh-autosuggestions.zsh\n\nplugins=(git zsh-syntax-highlighting zsh-autosuggestions)/g" ~/.zshrc
 
 echo '
-
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
 
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
